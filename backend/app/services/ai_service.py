@@ -5,14 +5,6 @@ from langchain_core.messages import (
     HumanMessage,
     SystemMessage,
 )
-
-from langchain_groq import ChatGroq
-
-
-from app.core.config import settings
-
-from app.services.rag_service import get_context
-
 from app.services.chat_utils import (
     GREETING_RESPONSE,
     THANKS_RESPONSE,
@@ -21,15 +13,11 @@ from app.services.chat_utils import (
 )
 
 
-
-# Initialize LLM
-
 llm = ChatGroq(
     model="llama-3.3-70b-versatile",
     temperature=0,
     api_key=settings.groq_api_key,
 )
-
 
 
 def ask_ai(message: str) -> str:
@@ -41,25 +29,16 @@ def ask_ai(message: str) -> str:
     3. Generate answer using LLM
     """
 
-
-
     # Greeting shortcut
     if is_greeting(message):
         return GREETING_RESPONSE
-
-
 
     # Thanks shortcut
     if is_thanks(message):
         return THANKS_RESPONSE
 
-
-
     # Retrieve knowledge
     context = get_context(message)
-
-
-
     system_prompt = f"""
 You are Yosef Azeneg's personal AI portfolio assistant.
 
@@ -108,18 +87,11 @@ Retrieved Context:
 {context}
 
 """
-
-
-
     messages = [
         SystemMessage(content=system_prompt),
         HumanMessage(content=message),
     ]
-
-
-
     response = llm.invoke(messages)
-
 
 
     return response.content

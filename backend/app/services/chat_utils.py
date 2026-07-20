@@ -1,18 +1,5 @@
-# app/services/chat_utils.py
-
-
-GREETINGS = {
-    "hi",
-    "hello",
-    "hey",
-    "yo",
-    "sup",
-    "hiya",
-    "good morning",
-    "good afternoon",
-    "good evening",
+GREETINGS = {"hi", "hello", "hey", "yo", "sup" "hiya", "good morning", "good afternoon", "good evening",
 }
-
 
 GREETING_RESPONSE = (
     "Hey there! 👋 I'm Yosef's AI assistant. "
@@ -21,14 +8,8 @@ GREETING_RESPONSE = (
 )
 
 
-THANKS = {
-    "thanks",
-    "thank you",
-    "thank u",
-    "thx",
-    "ty",
+THANKS = {"thanks","thank you", "thank u", "thx", "ty",
 }
-
 
 THANKS_RESPONSE = (
     "You're welcome! 😊 "

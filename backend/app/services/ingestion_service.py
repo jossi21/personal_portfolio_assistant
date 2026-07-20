@@ -5,8 +5,6 @@ from langchain_chroma import Chroma
 from app.services.embedding_service import embedding_model
 
 
-
-
 KNOWLEDGE_PATH = Path("app/knowledge")
 VECTOR_STORE_PATH = Path("app/vectorstore")
 

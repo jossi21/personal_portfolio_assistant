@@ -1,6 +1,6 @@
 from langchain_groq import ChatGroq
 from app.core.config import settings
-from app.services.knowledge_service import load_knowledge
+from app.services.rag_service import get_context
 
 
 # define our llm model here
@@ -11,23 +11,29 @@ llm = ChatGroq(
 )
 
 
-def ask_ai(message: str)-> str:
-    knowledge = load_knowledge()
+def ask_ai(message: str) -> str:
+    # Retrieve only the relevant knowledge
+    context = get_context(message)
 
     prompt = f"""
-You are Jossi's personal portfolio assistant.
+You are Yosef Azeneg's personal AI portfolio assistant.
 
-Answer questions using only the information provided below.
+Answer ONLY using the retrieved context below.
 
-If the information is not available, say:
-"I don't have that information."
+Rules:
+- Never invent information.
+- Yosef is the subject of every answer. Treat "him," "he," "his," "you," and "your" as referring to Yosef, not to you (the assistant), unless the question is clearly about the assistant itself (e.g. "what can you do?", "who made you?").
+- Always refer to Yosef in the third person (e.g. "Yosef works at...", not "I work at...").
+- If the question is vague or unclear, ask the user to clarify what they mean before answering.
+- If the answer cannot be found in the context, reply exactly: "I don't have that information."
+- If the question asks for a list, only include items that belong to that category.
+- Do not assume relationships between projects unless explicitly stated.
+- Keep answers clear and professional.
 
-Personal Information:
-
-{knowledge}
+Retrieved Context:
+{context}
 
 User Question:
-
 {message}
 """
     response = llm.invoke(prompt)

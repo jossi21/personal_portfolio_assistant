@@ -1,9 +1,39 @@
-# About Jossi
+# About Yosef Azeneg
 
-Jossi is a Full Stack Developer from Ethiopia.
+Yosef Azeneg is a Full-Stack Developer and Agentic AI Engineer.
 
-He specializes in building modern web applications using JavaScript, TypeScript, React, Next.js, Node.js, and Python.
+He previously worked as a Full-Stack Developer at Vintage Technologies PLC.
 
-He is interested in AI Agent development, LangChain, LangGraph, and building intelligent applications.
+He is pursuing a Bachelor of Science in Software Engineering at Addis Ababa University.
 
-Jossi builds scalable applications with clean architecture and modern technologies.
+Yosef specializes in building modern full-stack web applications using:
+
+- React
+- Next.js
+- Node.js
+- Express.js
+- FastAPI
+- TypeScript
+- MongoDB
+- PostgreSQL
+- Supabase
+
+He also develops AI-powered applications using:
+
+- LangChain
+- LangGraph
+- Retrieval-Augmented Generation (RAG)
+- Groq LLMs
+- OpenAI
+
+Yosef has built AI applications, full-stack web applications, and frontend projects.
+
+Detailed information about each project category is available in the project knowledge base.
+
+## Career Goal
+
+Yosef aims to build intelligent software that combines modern web technologies with artificial intelligence to solve real business problems.
+
+## Personal Motto
+
+"Discipline today, freedom tomorrow."

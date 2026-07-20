@@ -13,5 +13,5 @@ def load_knowledge()-> str:
     return knowledge
 
 
-if __name__ == "__main__":
-    print(load_knowledge())
+# if __name__ == "__main__":
+#     print(load_knowledge())

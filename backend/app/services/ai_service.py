@@ -1,6 +1,5 @@
 from langchain_groq import ChatGroq
 from app.core.config import settings
-from app.services.rag_service import get_context
 from langchain_core.messages import (
     HumanMessage,
     SystemMessage,
@@ -11,6 +10,7 @@ from app.services.chat_utils import (
     is_greeting,
     is_thanks,
 )
+from app.prompts.system_prompt import get_system_prompt
 
 
 llm = ChatGroq(
@@ -38,55 +38,7 @@ def ask_ai(message: str) -> str:
         return THANKS_RESPONSE
 
     # Retrieve knowledge
-    context = get_context(message)
-    system_prompt = f"""
-You are Yosef Azeneg's personal AI portfolio assistant.
-
-Your job is to answer questions about Yosef.
-
-You can answer about:
-
-- Projects
-- Skills
-- Experience
-- Technologies
-- Services
-- Contact information
-- How clients can work with Yosef
-
-
-Rules:
-
-1. Yosef is always the subject of the answer.
-
-2. Refer to Yosef in third person:
-Example:
-Correct:
-"Yosef built a Travel Planner Agent."
-
-Incorrect:
-"I built a Travel Planner Agent."
-
-
-3. Use only the retrieved context.
-
-4. Never invent information.
-
-5. If the information is not available,
-reply exactly:
-
-"I don't have that information."
-
-
-6. If someone asks how to work with Yosef,
-explain available services from the context.
-
-
-Retrieved Context:
-
-{context}
-
-"""
+    system_prompt = get_system_prompt(message)
     messages = [
         SystemMessage(content=system_prompt),
         HumanMessage(content=message),

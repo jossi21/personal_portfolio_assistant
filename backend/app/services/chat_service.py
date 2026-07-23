@@ -1,21 +1,16 @@
-from app.models.chat import (
-    ChatRequest,
-    ChatResponse,
-)
-from app.services.ai_service import ask_ai
+from app.models.chat import ChatRequest, ChatResponse
+from app.conversation.manager import ConversationManager
 
-def process_chat(request: ChatRequest) -> ChatResponse:
+def process_chat(
+        request: ChatRequest,
+        manager: ConversationManager) -> ChatResponse:
     """
     Process incoming chat requests.
 
     Responsibilities:
-    - Receive request data
-    - Send message to AI service
-    - Format response
-    """
+    - Receive validated request data
+    - Delegate conversation handling
+    - Return formatted response
+"""
 
-    answer = ask_ai(request.message)
-
-    return ChatResponse(
-        answer=answer
-    )
+    return manager.handle(request)

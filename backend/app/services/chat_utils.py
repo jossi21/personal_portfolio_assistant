@@ -1,4 +1,4 @@
-GREETINGS = {"hi", "hello", "hey", "yo", "sup" "hiya", "good morning", "good afternoon", "good evening",
+GREETINGS = {"hi", "hello", "hey", "yo", "sup","hiya", "good morning", "good afternoon", "good evening",
 }
 
 GREETING_RESPONSE = (

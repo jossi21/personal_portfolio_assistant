@@ -10,4 +10,4 @@ def get_context(question: str)-> str:
         doc.page_content for doc in documents
     )
 
-    return context
+    return context 

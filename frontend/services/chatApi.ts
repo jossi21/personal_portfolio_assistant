@@ -1,14 +1,14 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+import { ChatRequest, ChatResponse } from "@/types/chat";
 
-export async function sendMessage(message: string) {
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export async function sendMessage(data: ChatRequest): Promise<ChatResponse> {
   const response = await fetch(`${API_URL}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      message,
-    }),
+    body: JSON.stringify(data),
   });
 
   if (!response.ok) {

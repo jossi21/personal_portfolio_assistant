@@ -11,7 +11,7 @@ from app.services.chat_utils import (
     is_thanks,
 )
 from app.prompts.system_prompt import get_system_prompt
-
+from app.services.language_response import get_greeting_response
 
 llm = ChatGroq(
     model="llama-3.3-70b-versatile",
@@ -20,7 +20,7 @@ llm = ChatGroq(
 )
 
 
-def ask_ai(message: str) -> str:
+def ask_ai(message: str, language: str = "English") -> str:
     """
     Complete AI pipeline:
 
@@ -31,14 +31,14 @@ def ask_ai(message: str) -> str:
 
     # Greeting shortcut
     if is_greeting(message):
-        return GREETING_RESPONSE
+        return get_greeting_response(language)
 
     # Thanks shortcut
     if is_thanks(message):
         return THANKS_RESPONSE
 
     # Retrieve knowledge
-    system_prompt = get_system_prompt(message)
+    system_prompt = get_system_prompt(message, language)
     messages = [
         SystemMessage(content=system_prompt),
         HumanMessage(content=message),

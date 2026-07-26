@@ -1,18 +1,23 @@
 from app.models.chat import ChatRequest, ChatResponse
 from app.services.chat_utils import GREETING_RESPONSE, is_greeting
+from app.models.state import ConversationStateModel
+from app.models.language import Language
 
 
-# Handles greeting conversations.
+
+    # Handles greeting conversations.
+
 class GreetingAgent:
-    
-    # Process greeting requests.
-    def handle(self, request:ChatRequest)-> ChatResponse:
-        
 
-        if is_greeting(request.message):
-            return ChatResponse(
-                answer=GREETING_RESPONSE
-            )
+    def handle(
+        self,
+        request: ChatRequest,
+        state: ConversationStateModel
+    ) -> ChatResponse:
+
+
         return ChatResponse(
-            answer="Hello! How can i help ypu today?"
+            session_id=state.session_id,
+            answer=GREETING_RESPONSE,
+            language=state.language.value
         )

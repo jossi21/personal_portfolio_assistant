@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import health, chat, conversation
+from app.routes import health, chat, conversation, language
 from app.core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -20,6 +20,7 @@ app.add_middleware(CORSMiddleware,
 app.include_router(health.router)
 app.include_router(chat.router)
 app.include_router(conversation.router)
+app.include_router(language.router)
 
 # home page endpoint
 @app.get("/")

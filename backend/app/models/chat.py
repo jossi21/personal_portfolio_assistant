@@ -26,3 +26,4 @@ class ChatResponse(BaseModel):
     session_id: Optional[str] = None
     answer: str
     actions: Optional[List[Action]] = None
+    language: Optional[str] = None

@@ -1,6 +1,20 @@
 from langchain_huggingface import HuggingFaceEmbeddings
 
-# define the business logic which can create models
-embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
+
+_embedding_model = None
+
+
+def get_embedding_model():
+    """
+    Create and return embedding model.
+    Model is loaded only once.
+    """
+
+    global _embedding_model
+
+    if _embedding_model is None:
+        _embedding_model = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        )
+
+    return _embedding_model

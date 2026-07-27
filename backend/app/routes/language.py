@@ -31,7 +31,7 @@ def change_language(
             Action(
                 label="Change Language",
                 type=ActionType.LANGUAGE,
-                value="change_language",
+                value="change language",
             ),
         ],
         language=state.language.value,

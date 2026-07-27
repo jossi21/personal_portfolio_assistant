@@ -29,7 +29,7 @@ class IntentRouter:
             )
 
         # Generic "show me the language options" trigger
-        if message == "change_language":
+        if message == "change language":
             return RouteResult(
                 agent_type=AgentType.LANGUAGE,
                 language=None,

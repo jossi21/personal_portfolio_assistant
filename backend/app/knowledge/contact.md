@@ -7,7 +7,7 @@ Yosef Azeneg
 You can contact Yosef through:
 
 📧 Email: azenegyosef@gmail.com
-🌐 Portfolio: https://jossi-five.vercel.app
+🌐 Portfolio: https://yosef-azeneg.vercel.app/
 💻 GitHub: https://github.com/jossi21
 
 For project inquiries, email him directly.

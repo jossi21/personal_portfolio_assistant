@@ -1,4 +1,5 @@
-from app.models.chat import ChatRequest, ChatResponse
+from app.models.chat import ChatResponse
+from app.models.channel import ChannelMessage
 from app.routes.intent_router import IntentRouter
 from app.models.agent import AgentType
 from app.services.language_service import translate_response
@@ -25,7 +26,6 @@ from app.agents.language_agent import LanguageAgent
 class ConversationManager:
 
     def __init__(self):
-        self.state_manager = state_manager
         self.router = IntentRouter()
         self.state_manager = StateManager()
         self.rag_agent = RAGAgent()
@@ -38,7 +38,7 @@ class ConversationManager:
         }
 
 
-    def handle(self, request: ChatRequest) -> ChatResponse:
+    def handle(self, request: ChannelMessage) -> ChatResponse:
 
         state = self.state_manager.get_or_create(
             request.session_id

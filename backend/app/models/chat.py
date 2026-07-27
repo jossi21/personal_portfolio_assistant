@@ -6,6 +6,7 @@ from typing import Optional, List
 class ChatRequest(BaseModel):
     message: str
     session_id: Optional[str] = None
+    chat_id: Optional[str] = None
 
 # Supported action types for the frontend
 class ActionType(str, Enum):

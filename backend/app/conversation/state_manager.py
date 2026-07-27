@@ -24,11 +24,26 @@ class StateManager:
         return self.sessions.get(session_id)
 
     # return existing state or create a new one
-    def get_or_create(self, session_id: str | None
-    )-> ConversationStateModel:
+    def get_or_create(
+    self,
+    session_id: str | None
+) -> ConversationStateModel:
+
         if session_id:
             state = self.get(session_id)
+
             if state:
                 return state
 
+            # create state using provided session id
+            state = ConversationStateModel(
+                session_id=session_id
+            )
+
+            self.sessions[session_id] = state
+
+            return state
+
+
         return self.create()
+   

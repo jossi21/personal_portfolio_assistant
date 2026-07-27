@@ -21,7 +21,7 @@ class LanguageAgent:
       state.language has already been updated by ConversationManager,
       so we confirm the switch using a fixed, pre-written string
       in that language.
-    - Otherwise (generic "change_language" trigger), show the options.
+    - Otherwise (generic "change language" trigger), show the options.
     """
 
     def handle(
@@ -39,7 +39,7 @@ class LanguageAgent:
                     Action(
                         label="Change Language",
                         type=ActionType.LANGUAGE,
-                        value="change_language",
+                        value="change language",
                     ),
                 ],
                 language=state.language.value,

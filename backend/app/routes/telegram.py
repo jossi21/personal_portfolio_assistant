@@ -15,16 +15,18 @@ def telegram_webhook(
     data: dict,
     gateway: ChannelGateway = Depends(get_channel_gateway)
 ):
-
     response = gateway.handle_channel(
         data,
         "telegram"
     )
 
+    # print(response)
+
 
     telegram_service.send_message(
         chat_id=response["chat_id"],
-        message=response["message"]
+        message=response["message"],
+        actions=response.get("actions")
     )
 
 

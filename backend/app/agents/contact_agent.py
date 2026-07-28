@@ -25,7 +25,7 @@ class ContactAgent:
             Action(
                 label="LinkedIn",
                 type=ActionType.LINK,
-                value="https://www.linkedin.com/jossi21"
+                value="https://www.linkedin.com/in/jossi21/"
             ),
             Action(
                 label="GitHub",

@@ -5,8 +5,12 @@ from typing import Optional, List
 # define chat request class which used to validate the input data which the user send to us
 class ChatRequest(BaseModel):
     message: str
-    session_id: Optional[str] = None
-    chat_id: Optional[str] = None
+    session_id: str | None = None
+    chat_id: str | None = None
+
+    user_id: str | None = None
+    user_name: str | None = None
+    channel: str | None = None
 
 # Supported action types for the frontend
 class ActionType(str, Enum):

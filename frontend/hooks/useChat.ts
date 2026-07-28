@@ -1,15 +1,10 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { sendMessage } from "@/services/chatApi";
-import { ChatMessage, Language, Action } from "@/types/chat";
+import { ChatMessage, Language } from "@/types/chat";
 import { changeLanguage } from "@/services/languageApi";
 import { getConversation } from "@/services/conversationApi";
-
-const CHANGE_LANGUAGE_ACTION: Action = {
-  label: "Change Language",
-  type: "language",
-  value: "change_language",
-};
 
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -17,6 +12,7 @@ export function useChat() {
   const [language, setLanguage] = useState<Language>("English" as Language);
   const [loading, setLoading] = useState(false);
 
+  // Normal chat messages
   async function chat(text: string) {
     setMessages((prev) => [
       ...prev,
@@ -35,10 +31,36 @@ export function useChat() {
       });
 
       setSessionId(response.session_id);
+
       localStorage.setItem("session_id", response.session_id);
 
       setMessages((prev) => [
         ...prev,
+        {
+          role: "assistant",
+          content: response.answer,
+          actions: response.actions,
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // First welcome message
+  async function startConversation() {
+    setLoading(true);
+
+    try {
+      const response = await sendMessage({
+        message: "/start",
+      });
+
+      setSessionId(response.session_id);
+
+      localStorage.setItem("session_id", response.session_id);
+
+      setMessages([
         {
           role: "assistant",
           content: response.answer,
@@ -73,48 +95,34 @@ export function useChat() {
     }
   }
 
-  function resetChat() {
+  async function resetChat() {
     localStorage.removeItem("session_id");
+
     setSessionId(undefined);
-    setLanguage("en" as Language);
-    setMessages([
-      {
-        role: "assistant",
-        content: "",
-        actions: [
-          {
-            label: "Change Language",
-            type: "language",
-            value: "change_language",
-          },
-        ],
-      },
-    ]);
+
+    setLanguage("English" as Language);
+
+    setMessages([]);
+
+    // create new welcome session
+    await startConversation();
   }
 
   useEffect(() => {
     async function loadConversation() {
       const savedSession = localStorage.getItem("session_id");
 
+      // First visit
       if (!savedSession) {
-        setMessages([
-          {
-            role: "assistant",
-            content: "",
-            actions: [
-              {
-                label: "Change Language",
-                type: "language",
-                value: "change_language",
-              },
-            ],
-          },
-        ]);
+        await startConversation();
+
         return;
       }
 
       try {
         const data = await getConversation(savedSession);
+
+        setSessionId(savedSession);
 
         setLanguage(data.language);
 
@@ -123,6 +131,7 @@ export function useChat() {
 
           return {
             role: isUser ? "user" : "assistant",
+
             content: item.replace("User:", "").replace("Assistant:", "").trim(),
           };
         });
@@ -130,8 +139,11 @@ export function useChat() {
         setMessages(history);
       } catch (error) {
         localStorage.removeItem("session_id");
+
+        await startConversation();
       }
     }
+
     loadConversation();
   }, []);
 

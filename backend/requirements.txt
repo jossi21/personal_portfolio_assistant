@@ -10,7 +10,7 @@ langchain
 langchain-community
 langchain-groq
 langchain-huggingface
-
+langchain-chroma
 chromadb
 sentence-transformers==4.1.0
 transformers==4.52.2

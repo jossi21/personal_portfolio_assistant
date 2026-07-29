@@ -1,6 +1,7 @@
 from app.models.chat import ChatResponse, Action, ActionType
 from app.models.state import ConversationStateModel
 from app.models.channel import ChannelMessage
+from app.core.config import settings
 
 
 class WelcomeAgent:
@@ -34,27 +35,27 @@ class WelcomeAgent:
             actions=[
 
                 Action(
-                    label="🌐 Change Language",
+                    label="Change Language",
                     type=ActionType.LANGUAGE,
                     value="change_language"
                 ),
 
                 Action(
-                    label="💬 Telegram Bot",
+                    label="Telegram Bot",
                     type=ActionType.LINK,
                     value="http://t.me/JossiAzBot"
                 ),
 
                 Action(
-                    label="💚 WhatsApp Bot",
+                    label="WhatsApp Bot",
                     type=ActionType.LINK,
                     value="https://wa.me/+251925553491"
                 ),
 
                 Action(
-                    label="🌐 Continue Web Chat",
+                    label="Continue Web Chat",
                     type=ActionType.LINK,
-                    value="http://localhost:3000/"
+                    value=settings.web_chat_url
                 )
             ]
         )

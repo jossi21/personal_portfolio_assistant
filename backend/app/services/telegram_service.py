@@ -80,6 +80,4 @@ class TelegramService:
             url,
             json=payload
         )
-        print(response)
-
         return response.json()

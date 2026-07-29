@@ -12,6 +12,7 @@ class TelegramAdapter(ChannelAdapter):
 
             return ChannelMessage(
                 user_id=str(message["from"]["id"]),
+                user_name=message["from"].get("first_name"),
                 session_id=f"telegram:{message['chat']['id']}",
                 message=message.get("text", ""),
                 channel="telegram"
@@ -29,7 +30,6 @@ class TelegramAdapter(ChannelAdapter):
                 message=callback.get("data", ""),
                 channel="telegram"
             )
-
 
         raise ValueError("Unsupported Telegram update")
 

@@ -1,18 +1,42 @@
+# from app.models.channel import ChannelMessage
+# from app.models.chat import ChatResponse
+
+
 # class WhatsAppAdapter:
 
+#     def parse_message(
+#         self,
+#         request: dict
+#     ) -> ChannelMessage:
 
-#     def parse_message(self,data):
+#         message = (
+#             request["entry"][0]
+#             ["changes"][0]
+#             ["value"]
+#             ["messages"][0]
+#         )
 
-#         message = data["entry"][0]["changes"][0]["value"]
+#         return ChannelMessage(
+#             user_id=message["from"],
+#             channel="whatsapp",
+#             message=message["text"]["body"],
+#             session_id=message["from"]
+#         )
 
+
+#     def format_response(
+#         self,
+#         response: ChatResponse
+#     ):
 
 #         return {
-
-#             "user_id":
-#             message["messages"][0]["from"],
-
-#             "message":
-#             message["messages"][0]["text"]["body"],
-
-#             "channel":"whatsapp"
+#             "message": response.answer,
+#             "actions": [
+#                 {
+#                     "label": action.label,
+#                     "value": action.value,
+#                     "type": action.type
+#                 }
+#                 for action in (response.actions or [])
+#             ]
 #         }

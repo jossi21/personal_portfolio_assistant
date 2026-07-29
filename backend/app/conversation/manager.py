@@ -13,6 +13,7 @@ from app.agents.rag_agent import RAGAgent
 from app.agents.greeting_agent import GreetingAgent
 from app.agents.contact_agent import ContactAgent
 from app.agents.language_agent import LanguageAgent
+from app.agents.portfolio_agent import PortfolioAgent
 
 # state manager which create conversation state
 
@@ -36,6 +37,7 @@ class ConversationManager:
             AgentType.GREETING: GreetingAgent(),
             AgentType.CONTACT: ContactAgent(),
             AgentType.LANGUAGE: LanguageAgent(),
+            AgentType.PORTFOLIO: PortfolioAgent(),
             AgentType.RAG: self.rag_agent,
         }
 

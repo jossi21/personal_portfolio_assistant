@@ -3,6 +3,7 @@ from typing import Any
 from app.conversation.manager import ConversationManager
 from app.channels.web.adapter import WebAdapter
 from app.channels.telegram.adapter import TelegramAdapter
+from app.channels.whatsapp.adapter import WhatsAppAdapter
 
 
 class ChannelGateway:
@@ -16,6 +17,7 @@ class ChannelGateway:
         self.adapters = {
             "web": WebAdapter(),
             "telegram": TelegramAdapter(),
+            "whatsapp": WhatsAppAdapter(),
         }
 
 
